@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://mwj3r57xheoc"]
+
+[ext_resource type="Script" path="res://scripts/port.gd" id="1_quw7h"]
+[ext_resource type="Texture2D" uid="uid://c0i82m5wr7e3s" path="res://art/port.png" id="1_wkxh5"]
+[ext_resource type="Texture2D" uid="uid://by50mjia1rshp" path="res://art/slots0.png" id="3_ctpal"]
+[ext_resource type="AudioStream" uid="uid://dv7a60bjn463o" path="res://sounds/transmit.wav" id="6_77o7q"]
+
+[node name="Port" type="Area2D"]
+z_index = -2
+monitoring = false
+script = ExtResource("1_quw7h")
+
+[node name="Port" type="Sprite2D" parent="."]
+texture = ExtResource("1_wkxh5")
+centered = false
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(22, 99)
+polygon = PackedVector2Array(15, 0, 300, 0, 285, 80, -1, 80)
+
+[node name="Slot" type="Node2D" parent="."]
+position = Vector2(20, 100)
+
+[node name="1" type="Sprite2D" parent="."]
+position = Vector2(40, 25)
+texture = ExtResource("3_ctpal")
+centered = false
+
+[node name="2" type="Sprite2D" parent="."]
+position = Vector2(100, 25)
+texture = ExtResource("3_ctpal")
+centered = false
+
+[node name="3" type="Sprite2D" parent="."]
+position = Vector2(180, 25)
+texture = ExtResource("3_ctpal")
+centered = false
+
+[node name="4" type="Sprite2D" parent="."]
+position = Vector2(240, 25)
+texture = ExtResource("3_ctpal")
+centered = false
+
+[node name="PacketProcess" type="Timer" parent="."]
+one_shot = true
+
+[node name="TransmitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_77o7q")
+volume_db = -18.795
+pitch_scale = 0.9
+
+[connection signal="timeout" from="PacketProcess" to="." method="_on_packet_process_timeout"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr3jvxsi5bq65"]
+
+[ext_resource type="Script" path="res://scripts/start.gd" id="1_f81px"]
+
+[node name="start" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_f81px")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1176.0
+offset_bottom = 669.0
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 550.0
+offset_top = 537.0
+offset_right = 615.0
+offset_bottom = 577.0
+text = "start"
+
+[node name="RestartButton" type="Button" parent="."]
+visible = false
+offset_left = 551.0
+offset_top = 537.0
+offset_right = 616.0
+offset_bottom = 577.0
+text = "restart"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]

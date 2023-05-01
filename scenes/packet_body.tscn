@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2x5uo1ae22qi"]
+
+[ext_resource type="Script" path="res://scripts/packet_body.gd" id="1_7g60c"]
+[ext_resource type="PackedScene" uid="uid://dhgl35tshtwwy" path="res://scenes/packet_sprite.tscn" id="2_0klpf"]
+[ext_resource type="Texture2D" uid="uid://bh16ouu1p8uav" path="res://art/packetbg.png" id="3_kt85r"]
+
+[node name="PacketBody" type="StaticBody2D"]
+texture_filter = 1
+texture_repeat = 1
+input_pickable = true
+script = ExtResource("1_7g60c")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(15, 0, 300, 0, 285, 80, -1, 80)
+
+[node name="Dragging" parent="." instance=ExtResource("2_0klpf")]
+
+[node name="DraggingShape" type="Area2D" parent="Dragging"]
+input_pickable = false
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dragging/DraggingShape"]
+polygon = PackedVector2Array(15, 0, 300, 0, 285, 80, -1, 80)
+
+[node name="Packetbg" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.431373)
+z_index = -1
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("3_kt85r")
+centered = false
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(150, 40)
+scale = Vector2(15, 4)
+
+[connection signal="area_entered" from="Dragging/DraggingShape" to="." method="_on_dragging_shape_area_entered"]
+[connection signal="area_exited" from="Dragging/DraggingShape" to="." method="_on_dragging_shape_area_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
