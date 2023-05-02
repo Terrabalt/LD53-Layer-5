@@ -1,17 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://dr3jvxsi5bq65"]
+[gd_scene load_steps=6 format=3 uid="uid://dr3jvxsi5bq65"]
 
 [ext_resource type="Script" path="res://scripts/start.gd" id="1_f81px"]
+[ext_resource type="PackedScene" uid="uid://cjb5d3y01afs0" path="res://scenes/main.tscn" id="2_liekv"]
+[ext_resource type="Texture2D" uid="uid://k7aar1oln0oj" path="res://art/title.png" id="2_q0qc5"]
+[ext_resource type="PackedScene" uid="uid://cxxsuu8hywpso" path="res://scenes/flair.tscn" id="3_bm7vs"]
+
+[sub_resource type="Curve2D" id="Curve2D_s8alh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -25, 673, 0, 0, 0, 0, -25, -25, 0, 0, 0, 0, 1177, -25, 0, 0, 0, 0, 1177, 673, 0, 0, 0, 0, -25, 673)
+}
+point_count = 5
 
 [node name="start" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_f81px")
+main_game = ExtResource("2_liekv")
+flair = ExtResource("3_bm7vs")
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 offset_right = 1176.0
 offset_bottom = 669.0
 
 [node name="StartButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 550.0
 offset_top = 537.0
 offset_right = 615.0
@@ -20,11 +33,28 @@ text = "start"
 
 [node name="RestartButton" type="Button" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 551.0
 offset_top = 537.0
 offset_right = 616.0
 offset_bottom = 577.0
 text = "restart"
 
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(579, 214)
+texture = ExtResource("2_q0qc5")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_s8alh")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-25, 673)
+rotation = -1.5708
+
+[node name="FlairTimer" type="Timer" parent="."]
+wait_time = 0.671
+autostart = true
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="timeout" from="FlairTimer" to="." method="_on_flair_timer_timeout"]

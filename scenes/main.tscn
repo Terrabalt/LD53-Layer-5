@@ -114,11 +114,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Accelerate" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 7.5
 autostart = true
 
 [node name="Complexify" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 15.0
 autostart = true
 
 [node name="Bg" type="Sprite2D" parent="."]

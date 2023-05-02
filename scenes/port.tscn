@@ -49,4 +49,9 @@ stream = ExtResource("6_77o7q")
 volume_db = -18.795
 pitch_scale = 0.9
 
+[node name="GraceTimer" type="Timer" parent="."]
+wait_time = 1.25
+one_shot = true
+
 [connection signal="timeout" from="PacketProcess" to="." method="_on_packet_process_timeout"]
+[connection signal="timeout" from="GraceTimer" to="." method="_on_grace_timer_timeout"]
