@@ -103,5 +103,4 @@ func _on_complexify_timeout():
 func _on_accelerate_timeout():
 	currVelocity = min(currVelocity * 1.06, maxVelocity)
 	$SpawnPackets.wait_time = max($SpawnPackets.wait_time * 0.9, maxTimer)
-	print(currVelocity)
-	print($SpawnPackets.wait_time)
+	
